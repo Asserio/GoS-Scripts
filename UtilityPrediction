@@ -1,0 +1,1074 @@
+--Prediction script to all champions with skillshoots, and some Mini Combos. Made by Asserio
+-- Champions on the script = 15
+
+-- PrintChat
+local info = "Prediction Loaded"
+local upv = "Upvote if you like it!"
+local sig = "Made by Asserio"
+local ver = "v 1.1"
+textTable = {info,upv,sig,ver}
+PrintChat(textTable[1])
+PrintChat(textTable[2])
+PrintChat(textTable[3])
+PrintChat(textTable[4])
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Aatrox Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Aatrox" then
+-- Menu
+Config = scriptConfig("IAatrox", "Aatrox")
+Config.addParam("E", "Use Aatrox E", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+if IWalkConfig.Harass then
+
+-- Aatrox E
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local EPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1250,250,1075,35,false,true)
+	if Config.E then
+		if CanUseSpell(myHero, _E) == READY and EPred.HitChance == 1 then
+	CastSkillShot(_E,EPred.PredPos.x,EPred.PredPos.y,EPred.PredPos.z)
+		end
+	end
+
+end
+end
+end)
+end
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Ahri Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Ahri" then
+-- Menu
+Config = scriptConfig("IAhri", "Ahri")
+Config.addParam("Q", "Use Ahri Q", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("E", "Use Ahri E", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+if IWalkConfig.Harass then
+
+-- Ahri Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2500,250,1000,100,false,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+-- Ahri E
+		-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local EPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1550,250,1000,60,true,true)
+	if Config.E then
+		if CanUseSpell(myHero, _E) == READY and EPred.HitChance == 1 then
+	CastSkillShot(_E,EPred.PredPos.x,EPred.PredPos.y,EPred.PredPos.z)
+		end
+	end
+
+end
+end
+end)
+end
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Anivia Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+--[[if GetObjectName(GetMyHero()) == "Anivia" then
+-- Menu
+Config = scriptConfig("IAnivia", "Anivia")
+Config.addParam("Q", "Use Anivia Q", SCRIPT_PARAM_ONOFF, true)
+-- start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+if IWalkConfig.Harass then
+
+ -- Anivia Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),850,250,1100,110,false,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+end
+end
+end)
+end]]
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+------------------------------Annie Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Annie" then
+-- Menu
+Config = scriptConfig("IAnnie", "Annie")
+Config.addParam("Q", "Use Annie Q", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("W", "Use Annie W", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("R", "Use Annie R", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+if IWalkConfig.Harass then
+
+-- Annie Q
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and IsInDistance(unit, 625) then
+		CastTargetSpell(unit, _Q)
+		end
+	end
+
+-- Annie W
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,250,625,80,false,true)
+	if Config.W then
+		if CanUseSpell(myHero, _W) == READY and WPred.HitChance == 1 then
+	CastSkillShot(_W,WPred.PredPos.x,WPred.PredPos.y,WPred.PredPos.z)
+		end
+	end
+
+end
+end
+end)
+end
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Azir Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Bard Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Bard" then
+-- Menu
+Config = scriptConfig("IBard", "Bard")
+Config.addParam("Q", "Use Bard Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1000) then
+if IWalkConfig.Harass then
+
+-- Bard Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1600,250,950,60,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+end
+end
+
+end
+end
+end)
+end
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Blitzcrank Prediction-------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Blitzcrank" then
+-- Menu
+Config = scriptConfig("IBlitzcrank", "Blitzcrank")
+Config.addParam("Q", "Use Blitz Q", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("E", "Use Blitz E", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+if IWalkConfig.Harass then
+
+-- Blitz Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1800,250,1050,70,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+end
+end
+
+-- Blitz E
+if Config.E then
+	if CanUseSpell(myHero, _E) == READY and IsInDistance(unit, 250) then
+	CastSpell(_E)
+	end
+end
+
+
+end
+end
+end)
+end
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Brand Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Brand" then
+-- Menu
+Config = scriptConfig("IBrand", "Brand")
+Config.addParam("Q", "Use Brand Q", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("W", "Use Brand W", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("E", "Use Brand E", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("R", "Use Brand R", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+if KeyIsDown(string.byte("C")) then
+		Harrass()
+	end
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+if IWalkConfig.Combo then
+-- Brand E
+	if Config.E then
+		if CanUseSpell(myHero, _E) == READY and IsInDistance(unit, GetCastRange(myHero, _E)) then
+		CastTargetSpell(unit, _E)
+		end
+	end
+
+-- Brand Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1600,250,1100,60,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+-- Brand W
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,850,900,240,false,true)
+	if Config.W then
+		if CanUseSpell(myHero, _W) == READY and WPred.HitChance == 1 then
+	CastSkillShot(_W,WPred.PredPos.x,WPred.PredPos.y,WPred.PredPos.z)
+		end
+	end
+
+-- Brand R
+	if Config.R then
+		if CanUseSpell(myHero, _R) == READY and CanUseSpell(myHero, _Q) ~= READY and CanUseSpell(myHero, _W) ~= READY and CanUseSpell(myHero, _E) ~= READY and IsInDistance(unit, GetCastRange(myHero, _R)) then
+		CastTargetSpell(unit, _R)
+		end
+	end
+
+
+end
+end
+end)
+
+function Harrass()
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+
+-- Brand Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1600,250,1100,60,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+-- Brand W
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,850,900,240,false,true)
+	if Config.W then
+		if CanUseSpell(myHero, _W) == READY and WPred.HitChance == 1 then
+	CastSkillShot(_W,WPred.PredPos.x,WPred.PredPos.y,WPred.PredPos.z)
+		end
+	end
+end
+
+end
+end
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Braum Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Braum" then
+-- Menu
+Config = scriptConfig("IBraum", "Braum")
+Config.addParam("Q", "Use Braum Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+if IWalkConfig.Harass then
+
+-- Braum Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1700,250,1050,60,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+end
+end
+end)
+end
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Caitlyn Prediction----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Caitlyn" then
+-- Menu
+Config = scriptConfig("ICaitlyn", "Caitlyn")
+Config.addParam("Q", "Use Caitlyn Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1400) then
+if IWalkConfig.Harass then
+
+-- Caitlyn Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2200,625,1300,90,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+
+end
+end
+end)
+end
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Cassiopeia Prediction-------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Cho'Gath Prediction----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Chogath" then
+-- Menu
+Config = scriptConfig("IChogath", "Chogath")
+Config.addParam("Q", "Use ChoGath Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1000) then
+if IWalkConfig.Harass then
+
+-- Cho'Gath Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1200,950,250,false,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+end
+end
+end)
+end
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Corki Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Corki" then
+-- Menu
+Config = scriptConfig("ICorki", "Corki")
+Config.addParam("R", "Use Corki R", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1500) then
+if IWalkConfig.Harass then
+
+if GetCastName(myHero, _R) == "MissileBarrage" then
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local RPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2000,200,1300,40,true,true)
+	if Config.R then
+		if CanUseSpell(myHero, _R) == READY and RPred.HitChance == 1 then
+	CastSkillShot(_R,RPred.PredPos.x,RPred.PredPos.y,RPred.PredPos.z)
+		end
+	end
+
+if GetCastName(myHero, _R) == "MissileBarrage2" then
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local RPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2000,200,1500,40,true,true)
+	if Config.R then
+		if CanUseSpell(myHero, _R) == READY and RPred.HitChance == 1 then
+	CastSkillShot(_R,RPred.PredPos.x,RPred.PredPos.y,RPred.PredPos.z)
+		end
+	end
+
+
+end
+end
+end
+end
+end)
+end
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Darius Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Diana Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------DrMundo Prediction----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "DrMundo" then
+-- Menu
+Config = scriptConfig("IDrMundo", "DrMundo")
+Config.addParam("Q", "Use DrMundo Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+if IWalkConfig.Harass then
+
+-- Dr.Mundo Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2000,250,1050,60,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+end
+end
+end)
+end
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Draven Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Ekko Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Elise Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Ezreal Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Ezreal" then
+-- Menu
+Config = scriptConfig("IEzreal", "Ezreal")
+Config.addParam("Q", "Use Ezreal Q", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("W", "Use Ezreal W", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1250) then
+if IWalkConfig.Harass then
+
+-- Ezreal Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2000,250,1200,60,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+-- Ezreal W
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1600,250,1050,80,false,true)
+	if Config.W then
+		if CanUseSpell(myHero, _W) == READY and WPred.HitChance == 1 then
+	CastSkillShot(_W,WPred.PredPos.x,WPred.PredPos.y,WPred.PredPos.z)
+		end
+	end
+end
+
+
+end
+end)
+end
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Fizz Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Galio Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Gnar Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Gnar" then
+-- Menu
+Config = scriptConfig("IGnar", "Gnar")
+Config.addParam("Q", "Use Gnar Q", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("Q2", "Use MegaGnar Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1150) then
+if IWalkConfig.Harass then
+
+-- Mini Gnar Q
+
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2500,250,1125,60,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+end
+end
+-- Mega Gnar Q
+if GetCastName(myHero, _Q) == "GnarBigQ" then
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local Q2Pred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2100,500,1150,90,true,true)
+	if Config.Q2 then
+		if CanUseSpell(myHero, _Q) == READY and Q2Pred.HitChance == 1 then
+	CastSkillShot(_Q,Q2Pred.PredPos.x,Q2Pred.PredPos.y,Q2Pred.PredPos.z)
+end
+end
+
+end
+end
+end
+end)
+end
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Gragas Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Graves Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------Heimerdinger Prediction-------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Irelia Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Janna Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Jayce Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Jinx Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Kalista Prediction----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Karma Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Karthus Prediction----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Kennen Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Kennen" then
+-- Menu
+Config = scriptConfig("IKennen", "Kennen")
+Config.addParam("Q", "Use Kennen Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+if IWalkConfig.Harass then
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1700,125,1050,50,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+end
+end
+
+end
+end
+end)
+end
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------KogMaw Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------LeBlanc Prediction----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------LeeSin Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+------------------------------Lissandra Prediction---------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Lulu Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+--------------------------------Lux Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Malzahar Prediction---------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Morgana Prediction----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Nami Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+------------------------------Nautilus Prediction----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Nidalee Prediction----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Nocturne Prediction---------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Olaf Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+------------------------------Orianna Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Quinn Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------RekSai Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Rengar Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Rumble Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Shyvana Prediction----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Sivir Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Skarner Prediction----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Soraka Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Swain Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Syndra Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+------------------------------TahmKench Prediction---------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Talon Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Thresh Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Thresh" then
+-- Menu
+Config = scriptConfig("IThresh", "Thresh")
+Config.addParam("Q", "Use Thresh Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1150) then
+if IWalkConfig.Harass then
+
+-- Thresh Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1900,500,1100,70,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+
+end
+end
+end)
+end
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+------------------------------Twisted Fate Prediction------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Twich Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Urgot Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Varus Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Veigar Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------VelKoz Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Viktor Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Xerath Prediction-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Zed Prediction--------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Ziggs Prediction------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-------------------------------Zyra Prediction-------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------

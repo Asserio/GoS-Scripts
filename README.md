@@ -1,1 +1,2 @@
-# GoS-Scripts 2016
+# GoS-Scripts
+Scripts
