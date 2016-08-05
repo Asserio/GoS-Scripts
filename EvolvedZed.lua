@@ -154,34 +154,24 @@ local Edmg = getdmg("E",unit,myHero,1,GetCastLevel(myHero,_E))
 local Rdmg = getdmg("R",unit,myHero,1,GetCastLevel(myHero,_R))
 local physical = GetBaseDamage(myHero) + GetBonusDmg(myHero)
 local magical = GetBonusAP(myHero)
-local TotalDamage = physical + magical * .1
+local TotalDamage = Qdmg + Edmg + Rdmg + physical + magical  * .1
 local enemyLife = GetCurrentHP(unit)+GetMagicShield(unit)+GetDmgShield(unit)
 
-	if ValidTarget(unit, GetCastRange(myHero, _R)) and Ready(_R) and deathMark == nil and savestacked > enemyLife then
-		CastTargetSpell(unit, _R)
+
+	if savestacked == 0 then
+		if ValidTarget(unit, GetCastRange(myHero, _R)) and Ready(_R) and deathMark == nil and TotalDamage > enemyLife then
+			CastTargetSpell(unit, _R)
+		end
 	end
---[[if Ready(_Q) then
-	if ValidTarget(unit, GetCastRange(myHero, _R)) and Ready(_R) and deathMark == nil and TotalDamage + Qdmg > enemyLife then
-		CastTargetSpell(unit, _R)
-	end
-end
-if Ready(_E) then
-    if ValidTarget(unit, GetCastRange(myHero, _R)) and Ready(_R) and deathMark == nil and TotalDamage + Edmg > enemyLife then
-		CastTargetSpell(unit, _R)
-	end
-end
-if Ready(_Q) and Ready(_E) then
-	if ValidTarget(unit, GetCastRange(myHero, _R)) and Ready(_R) and deathMark == nil and TotalDamage + Qdmg + Edmg > enemyLife then
-		CastTargetSpell(unit, _R)
-	end
-end]]
+	--[[if savestacked ~= 0 then  -- logic that wouldn't work good agains others, forget here
+		if ValidTarget(unit, GetCastRange(myHero, _R)) and Ready(_R) and deathMark == nil and savestacked > enemyLife then
+			CastTargetSpell(unit, _R)
+		end
+	end]]
 -- Go back
 	if deathMark ~= nil and stackeddamage > enemyLife then
 		CastSpell(_R)
 	end
-	--if deathMark == nil and not ValidTarget(unit, GetCastRange(myHero,_E)) and Ready(_R) then
-		--CastSpell(_R)
-	--end
 end
 
 OnUpdateBuff (function(unit, buff)
@@ -208,10 +198,10 @@ end)
 function gapClose(unit)
 if deathMark ~= true then
 	if Zed.Combo.W:Value() then
-		if Ready(_W) and ValidTarget(unit, GetRange(myHero)+GetCastRange(myHero,_W)) and not IsInDistance(unit, GetCastRange(myHero,_E)+GetRange(myHero)) then
-			local GaWPred = GetPredictionForPlayer(myHeroPos(),unit,GetMoveSpeed(unit),300,300,GetCastRange(myHero,_W)+GetRange(myHero),250,false,false)
-			if GaWPred.HitChance == 1 then
-				CastSkillShot(_W,GaWPred.PredPos.x,GaWPred.PredPos.y,GaWPred.PredPos.z)
+		if Ready(_W) and ValidTarget(unit, GetRange(myHero)+GetCastRange(myHero,_W)) and not IsInDistance(unit, GetCastRange(myHero,_E)) then
+			local GaPPred = GetPredictionForPlayer(myHeroPos(),unit,GetMoveSpeed(unit),250,250,GetCastRange(myHero,_W)+GetRange(myHero),250,false,false)
+			if GaPPred.HitChance == 1 then
+				CastSkillShot(_W,GaPPred.PredPos.x,GaPPred.PredPos.y,GaPPred.PredPos.z)
 			end
 		end
 	end
@@ -239,9 +229,9 @@ OnDraw(function(myHero) -- example
 	if CanUseSpell(myHero, _E) == READY and Zed.Draw.DrawE:Value() then DrawCircle(myHeroPos().x,myHeroPos().y,myHeroPos().z,GetCastRange(myHero,_E),3,100,GoS.Green) end
 	if Zed.Drawings.DrawS:Value() then
 		for i, obj in pairs(objects) do -- objects table
-			DrawCircle(GetOrigin(obj), GetCastRange(myHero,_Q),1,50,GoS.Blue)
-			DrawCircle(GetOrigin(obj), GetCastRange(myHero,_E),1,50,GoS.Blue)
-			DrawCircle(GetOrigin(obj), 50,3,50,GoS.White)
+			DrawCircle(GetOrigin(obj), GetCastRange(myHero,_Q),1,50,GoS.Red)
+			DrawCircle(GetOrigin(obj), GetCastRange(myHero,_E),1,50,GoS.Red)
+			DrawCircle(GetOrigin(obj), 50,3,50,GoS.Blue)
 		end
 	end
 	-- Credits end here
@@ -251,22 +241,22 @@ local Edmg = getdmg("E",unit,myHero,1,GetCastLevel(myHero,_E))
 local Rdmg = getdmg("R",unit,myHero,1,GetCastLevel(myHero,_R))
 local physical = GetBaseDamage(myHero) + GetBonusDmg(myHero)
 local magical = GetBonusAP(myHero)
-local TotalDamage = physical + magical * .1
+local TotalDamage = Qdmg + Edmg + Rdmg + physical + magical * .1
 	if ValidTarget(unit, 1400) then
-		--[[local Qdmg = getdmg("Q",unit,myHero,1,GetCastLevel(myHero,_Q))
+		--[[
 		if Ready(_Q) then
-			DrawDmgOverHpBar(unit,GetCurrentHP(unit),Qdmg,0,0xff00ff00)
+			DrawDmgOverHpBar(unit,GetCurrentHP(unit),Qdmg,0,GoS.Green)
 		end
-		local Edmg = getdmg("E",unit,myHero,1,GetCastLevel(myHero,_E))
 		if Ready(_E) then
-			DrawDmgOverHpBar(unit,GetCurrentHP(unit),Edmg,0,0xff00ff00)
+			DrawDmgOverHpBar(unit,GetCurrentHP(unit),Edmg,0,GoS.Green)
 		end]]
-		local Rdmg = getdmg("R",unit,myHero,1,GetCastLevel(myHero,_R))
-		if Ready(_R) then
-			DrawDmgOverHpBar(unit,GetCurrentHP(unit),savestacked,0,0xff00ff00)
+		if savestacked ~= 0 and Ready(_R) then
+			DrawDmgOverHpBar(unit,GetCurrentHP(unit),savestacked,0,GoS.Green)
+		elseif savestacked == 0 and Ready(_R) then
+			DrawDmgOverHpBar(unit,GetCurrentHP(unit),TotalDamage,0,GoS.Green)
 		end
 		if deathMark ~= nil then
-		   DrawDmgOverHpBar(unit,GetCurrentHP(unit),stackeddamage,0,0xff00ff00)
+		   DrawDmgOverHpBar(unit,GetCurrentHP(unit),stackeddamage,0,GoS.Green)
 		end
 	end
 end)
