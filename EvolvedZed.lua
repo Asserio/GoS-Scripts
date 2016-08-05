@@ -35,7 +35,7 @@ deathMark = nil
 local Wtime = 0
 local objects = {}
 local stackeddamage = 0
-local savestacked = 0
+
 OnTick(function(myHero)
 local unit = GetCurrentTarget()
 if Zed.Misc.Emode.AE:Value() then
@@ -154,20 +154,12 @@ local Edmg = getdmg("E",unit,myHero,1,GetCastLevel(myHero,_E))
 local Rdmg = getdmg("R",unit,myHero,1,GetCastLevel(myHero,_R))
 local physical = GetBaseDamage(myHero) + GetBonusDmg(myHero)
 local magical = GetBonusAP(myHero)
-local TotalDamage = Qdmg + Edmg + Rdmg + physical + magical  * .1
+local TotalDamage = Qdmg + Edmg + Rdmg + ((Qdmg + Edmg + physical)*(0.1+0.15 * GetCastLevel(myHero,_R))) + physical + magical * .1
 local enemyLife = GetCurrentHP(unit)+GetMagicShield(unit)+GetDmgShield(unit)
 
-
-	if savestacked == 0 then
-		if ValidTarget(unit, GetCastRange(myHero, _R)) and Ready(_R) and deathMark == nil and TotalDamage > enemyLife then
-			CastTargetSpell(unit, _R)
-		end
+	if ValidTarget(unit, GetCastRange(myHero, _R)) and Ready(_R) and deathMark == nil and TotalDamage > enemyLife then
+		CastTargetSpell(unit, _R)
 	end
-	--[[if savestacked ~= 0 then  -- logic that wouldn't work good agains others, forget here
-		if ValidTarget(unit, GetCastRange(myHero, _R)) and Ready(_R) and deathMark == nil and savestacked > enemyLife then
-			CastTargetSpell(unit, _R)
-		end
-	end]]
 -- Go back
 	if deathMark ~= nil and stackeddamage > enemyLife then
 		CastSpell(_R)
@@ -175,22 +167,21 @@ local enemyLife = GetCurrentHP(unit)+GetMagicShield(unit)+GetDmgShield(unit)
 end
 
 OnUpdateBuff (function(unit, buff)
-	if not unit or not buff then
-		return
-	end
+	--if not unit or not buff then
+		--return
+	--end
 	if buff.Name == "zedrdeathmark" then
 		print("Not going back!!")
       	deathMark = true
     end
 end)
 OnRemoveBuff (function(unit, buff)
-	if not unit or not buff then
-		return
-	end
+	--if not unit or not buff then
+		--return
+	--end
 	if buff.Name == "zedrdeathmark" then
 		print("Now we can go back!")
 		deathMark = nil
-		savestacked = stackeddamage
 		stackeddamage = 0
     end
 end)
@@ -229,34 +220,34 @@ OnDraw(function(myHero) -- example
 	if CanUseSpell(myHero, _E) == READY and Zed.Draw.DrawE:Value() then DrawCircle(myHeroPos().x,myHeroPos().y,myHeroPos().z,GetCastRange(myHero,_E),3,100,GoS.Green) end
 	if Zed.Drawings.DrawS:Value() then
 		for i, obj in pairs(objects) do -- objects table
+		 if not IsDead(obj) then
 			DrawCircle(GetOrigin(obj), GetCastRange(myHero,_Q),1,50,GoS.Red)
 			DrawCircle(GetOrigin(obj), GetCastRange(myHero,_E),1,50,GoS.Red)
 			DrawCircle(GetOrigin(obj), 50,3,50,GoS.Blue)
+		 end
 		end
 	end
-	-- Credits end here
+-- Credits end here
 local unit = GetCurrentTarget()
 local Qdmg = getdmg("Q",unit,myHero,1,GetCastLevel(myHero,_Q))
 local Edmg = getdmg("E",unit,myHero,1,GetCastLevel(myHero,_E))
 local Rdmg = getdmg("R",unit,myHero,1,GetCastLevel(myHero,_R))
 local physical = GetBaseDamage(myHero) + GetBonusDmg(myHero)
 local magical = GetBonusAP(myHero)
-local TotalDamage = Qdmg + Edmg + Rdmg + physical + magical * .1
+-- Credits to Noddy for the Dmg formula and Zwei for helping with it
+local TotalDamage = Qdmg + Edmg + Rdmg + ((Qdmg + Edmg + physical)*(0.1+0.15 * GetCastLevel(myHero,_R))) + physical + magical * .1
 	if ValidTarget(unit, 1400) then
-		--[[
 		if Ready(_Q) then
 			DrawDmgOverHpBar(unit,GetCurrentHP(unit),Qdmg,0,GoS.Green)
 		end
 		if Ready(_E) then
 			DrawDmgOverHpBar(unit,GetCurrentHP(unit),Edmg,0,GoS.Green)
-		end]]
-		if savestacked ~= 0 and Ready(_R) then
-			DrawDmgOverHpBar(unit,GetCurrentHP(unit),savestacked,0,GoS.Green)
-		elseif savestacked == 0 and Ready(_R) then
+		end
+		if Ready(_R) then
 			DrawDmgOverHpBar(unit,GetCurrentHP(unit),TotalDamage,0,GoS.Green)
 		end
 		if deathMark ~= nil then
-		   DrawDmgOverHpBar(unit,GetCurrentHP(unit),stackeddamage,0,GoS.Green)
+		   DrawDmgOverHpBar(unit,GetCurrentHP(unit),stackeddamage,0,GoS.Red)
 		end
 	end
 end)
